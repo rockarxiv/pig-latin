@@ -27,8 +27,8 @@ public class PigLatinTransformerTest {
 
     @Test
     public void testWordWithCapitalization() {
-        final String transformResult = PigLatinTransformer.transformToPigLatin("this-thing");
-        String expected = "histay-hingtay";
+        final String transformResult = PigLatinTransformer.transformToPigLatin("McCloud");
+        String expected = "CcLoudmay";
         Assert.assertEquals(expected, transformResult);
     }
 
