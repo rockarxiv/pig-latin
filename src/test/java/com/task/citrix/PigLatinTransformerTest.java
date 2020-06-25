@@ -33,6 +33,13 @@ public class PigLatinTransformerTest {
     }
 
     @Test
+    public void testWordEndingWithWay() {
+        final String transformResult = PigLatinTransformer.transformToPigLatin("stairway");
+        String expected = "stairway";
+        Assert.assertEquals(expected, transformResult);
+    }
+
+    @Test
     public void testSentence() {
         final String transformResult = PigLatinTransformer.transformToPigLatin("I can't hear you!");
         String expected = "Iway antca'y earhay ouyay!";

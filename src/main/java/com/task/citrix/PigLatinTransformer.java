@@ -69,6 +69,8 @@ public class PigLatinTransformer {
                 transformedWordBuilder.append(transformed);
             }
             transformedWord = transformedWordBuilder.toString();
+        } else if(word.toLowerCase().endsWith(APPEND_FOR_VOWELS)) {
+            return word;
         } else {
             char[] chars = word.toCharArray();
             boolean isStartingWithVowel = VOWELS.contains(Character.toLowerCase(chars[0]));
