@@ -2,10 +2,12 @@ package com.task.citrix;
 
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class PigLatinTransformer {
     private static final Set<Character> VOWELS = new HashSet<>();
     private static final Set<Character> PUNCTUATION_MARKS = new HashSet<>();
+    private static final String END_WITH_WAY_PATTERN;
     private static final String HYPHENS = "-";
     private static final String APPEND_FOR_VOWELS = "way";
     private static final String APPEND_FOR_CONSONANT = "ay";
@@ -30,6 +32,13 @@ public class PigLatinTransformer {
         PUNCTUATION_MARKS.add('\\');
         PUNCTUATION_MARKS.add('_');
         PUNCTUATION_MARKS.add('`');
+        StringBuilder builder = new StringBuilder();
+        builder.append("(.*?)(").append(APPEND_FOR_VOWELS).append(")").append("([");
+        PUNCTUATION_MARKS.forEach(character -> {
+            builder.append("\\\\").append(character);
+        });
+        builder.append("]*)$");
+        END_WITH_WAY_PATTERN = builder.toString();
     }
 
     /**
@@ -69,7 +78,7 @@ public class PigLatinTransformer {
                 transformedWordBuilder.append(transformed);
             }
             transformedWord = transformedWordBuilder.toString();
-        } else if(word.toLowerCase().endsWith(APPEND_FOR_VOWELS)) {
+        } else if(word.matches(END_WITH_WAY_PATTERN)) {
             return word;
         } else {
             char[] chars = word.toCharArray();
